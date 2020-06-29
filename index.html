@@ -14,10 +14,35 @@
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
 
 
-    <title>Hello, world!</title>
+    <title>Library</title>
   </head>
   <body>
-
+	<div class="userModal">
+		<div class="modalContent">
+			<form clas="modalForm">
+			  	<div class="form-row">
+				    <div class="form-group col-md-12">
+				    	<label>Book title</label>
+				    	<input type="text" class="form-control" placeholder="Title">
+				    </div>
+				    <div class="form-group col-md-12">
+				    	<label >Author</label>
+						<input type="text" class="form-control" placeholder="Author">
+				    </div>
+				</div>
+			  	<div class="form-group">
+			  		<label for="inputAddress">Address</label>
+			    	<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="inputAddress2">Address 2</label>
+			    	<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+			  	</div>
+			  	<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+ 
     <div class="header">
 	 	<div class="container-fluid header-container">
 	 		<div class="row"> 
@@ -123,7 +148,6 @@
 			</div>
 		</div>	 
 	</div>
-
     <script src="script.js"></script>
   </body>
 </html>
