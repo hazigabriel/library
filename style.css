@@ -148,7 +148,8 @@ background: linear-gradient(to left, rgba(50,57,51,1) 0%, rgba(67,79,68,1) 15%, 
  	margin-top: -2em;
  	font-size: 1.5em;
  	transform: rotate(-90deg);
-	-webkit-transition: -webkit-transform .3s 
+	-webkit-transition: -webkit-transform .3s;
+	cursor: pointer
 }
 .fa-times-circle:hover {
 	transform: rotate(90deg);

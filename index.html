@@ -35,16 +35,16 @@
 			  	<div class="form-row">
 				    <div class="fo rm-group col-md-12">
 				    	<label>Book title</label>
-				    	<input type="text" class="form-control" placeholder="Title">
+				    	<input type="text" class="form-control bookTitle" placeholder="Title">
 				    </div>
 				    <div class="form-group col-md-12">
 				    	<label >Author</label>
-						<input type="text" class="form-control" placeholder="Author">
+						<input type="text" class="form-control bookAuthor" placeholder="Author">
 				    </div>
 				</div>
 			  	<div class="form-group">
 			  		<label for="inputAddress">Number of pages</label>
-			    	<input type="text" class="form-control" id="inputAddress" placeholder="Page number">
+			    	<input type="text" class="form-control bookPageNo" placeholder="Page number">
 			  	</div>
 
 			   	<label>Did you read the book?</label>
@@ -52,17 +52,17 @@
 				<div class="form-group ">
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
 						
-					  	<label class="btn btn-secondary active">
-							<input type="radio" name="options" id="option1" checked> Yes
+					  	<label class="btn btn-secondary   readToggle readToggleTrue">
+							<input type="radio" name="options" id="option1"  > Yes
 						</label>
 				 
-						<label class="btn btn-secondary">
+						<label class="btn btn-secondary   readToggle readToggleFalse">
 							<input type="radio" name="options" id="option2"> No
 						</label>
 					</div>
 
 				</div>
-			  	<button type="submit" class="btn btn-primary">Submit</button>
+			  	<div class="btn btn-primary submitButton">Submit</div>
 			</form>
 		</div>
 	</div>
@@ -172,6 +172,7 @@
 			</div>
 		</div>	 
 	</div>
+
     <script src="script.js"></script>
   </body>
 </html>
