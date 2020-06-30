@@ -129,7 +129,7 @@ background: linear-gradient(to left, rgba(50,57,51,1) 0%, rgba(67,79,68,1) 15%, 
 	position: fixed;
  	background-color: rgba(0,0,0, 0.7);
  	z-index: 999;
- 	display: flex;
+ 	display: none;
  	justify-content: center;
  	align-items: center;
  	-webkit-transition: -webkit-transform .8s
@@ -141,5 +141,16 @@ background: linear-gradient(to left, rgba(50,57,51,1) 0%, rgba(67,79,68,1) 15%, 
 	border-radius:2px;
 }
 .modalForm {
- align-items: center
+ 	align-items: center
+}
+.fa-times-circle { /* modal exit button */ 
+	position: fixed;
+ 	margin-top: -2em;
+ 	font-size: 1.5em;
+ 	transform: rotate(-90deg);
+	-webkit-transition: -webkit-transform .3s 
+}
+.fa-times-circle:hover {
+	transform: rotate(90deg);
+	-webkit-transition: -webkit-transform .3s 
 }

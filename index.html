@@ -18,10 +18,22 @@
   </head>
   <body>
 	<div class="userModal">
-		<div class="modalContent">
+		<div class="modalContent jumbotron">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-11">
+						
+					</div>
+					<div class="col-md-1">
+						<i class="fas fa-times-circle closeModalButton"></i>
+					</div>
+				</div>
+				
+			</div> 
+			<h4>Please complete the information below to add a new book</h2>
 			<form clas="modalForm">
 			  	<div class="form-row">
-				    <div class="form-group col-md-12">
+				    <div class="fo rm-group col-md-12">
 				    	<label>Book title</label>
 				    	<input type="text" class="form-control" placeholder="Title">
 				    </div>
@@ -31,13 +43,25 @@
 				    </div>
 				</div>
 			  	<div class="form-group">
-			  		<label for="inputAddress">Address</label>
-			    	<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+			  		<label for="inputAddress">Number of pages</label>
+			    	<input type="text" class="form-control" id="inputAddress" placeholder="Page number">
 			  	</div>
-			  	<div class="form-group">
-			    	<label for="inputAddress2">Address 2</label>
-			    	<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-			  	</div>
+
+			   	<label>Did you read the book?</label>
+
+				<div class="form-group ">
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						
+					  	<label class="btn btn-secondary active">
+							<input type="radio" name="options" id="option1" checked> Yes
+						</label>
+				 
+						<label class="btn btn-secondary">
+							<input type="radio" name="options" id="option2"> No
+						</label>
+					</div>
+
+				</div>
 			  	<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>
@@ -48,7 +72,7 @@
 	 		<div class="row"> 
 				<div class="col-md-1"></div>
 		 	 	<div class="col-md-1">
-		 	 		<div class="icon-wrapper"><i class="fas fa-plus-circle"></i></i></div>
+		 	 		<div class="icon-wrapper"><i class="fas fa-plus-circle newBookButton"></i> </div>
 		 	 	</div>
 
 		 	 	<div class="col-md-2">

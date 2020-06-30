@@ -1,6 +1,9 @@
- let click = document.querySelector(".fas");
- click.addEventListener("click", function(){
- 	addBookToLibray()
+ 
+document.querySelector(".newBookButton").addEventListener("click", function(){
+ 	document.querySelector(".userModal").style.display = "flex";
+ })
+document.querySelector(".closeModalButton").addEventListener("click", function(){
+ 	document.querySelector(".userModal").style.display = "none";
  })
 
 let myLibrary = [];
