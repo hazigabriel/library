@@ -60,8 +60,9 @@ document.querySelector(".submitButton").addEventListener("click", function(){
 			}  else if(title === "" || author == "" || pageNo == "" || readStatus() == undefined) {
 				alert("Please complete all fields");
 			} else {
-				userInputModal.close()
-				userInputModal.resetInput()
+				addBookToLibray(title, author, pageNo, readStatus());
+				userInputModal.close();
+				userInputModal.resetInput();
 			}
 		 
 	} 
@@ -85,10 +86,28 @@ function Book(title, author, pageNo, readStatus) {
 }
 
 
-function addBookToLibray() {
-	let one = prompt("book title?");
-	let two = prompt("book author?");
-	let three = prompt("page no?");
-	let four = prompt("read?");
-	myLibrary.push(new Book(one, two, three, four))
+function addBookToLibray(title, author, pageNo, readStatus) {
+	myLibrary.push(new Book(title, author, pageNo, readStatus))
+}
+function render(title, author, pageNo, readStatus){
+	let bookContainer = document.querySelector(".book-container");
+	let book = document.createElement("div");
+	let bookTitle = document.createElement("p");
+	let bookAuthor = document.createElement("p");
+	let bookPageNo = document.createElement("p");
+	let bookReadStatusTrue = document.createElement("button");
+	let bookReadStatusFalse = document.createElement("button");
+	let bookDelete = document.createElement("button")
+	book.classList.add("book");
+	bookDelete.classList.add("btn", "btn-danger");
+
+	bookTitle.textContent = title;
+	bookAuthor.textContent = `written by: ${author}`;
+	bookPageNo.textContent = `Page number: ${pageNo}`;
+
+	book.appendChild(bookTitle);
+	book.appendChild(bookAuthor);
+	book.appendChild(bookPageNo);
+
+	bookContainer.append(book)
 }
