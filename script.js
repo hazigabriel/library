@@ -63,6 +63,7 @@ document.querySelector(".submitButton").addEventListener("click", function(){
 				addBookToLibray(title, author, pageNo, readStatus());
 				userInputModal.close();
 				userInputModal.resetInput();
+
 			}
 		 
 	} 
@@ -87,7 +88,8 @@ function Book(title, author, pageNo, readStatus) {
 
 
 function addBookToLibray(title, author, pageNo, readStatus) {
-	myLibrary.push(new Book(title, author, pageNo, readStatus))
+	myLibrary.push(new Book(title, author, pageNo, readStatus));
+	render(title, author, pageNo, readStatus);
 }
 function render(title, author, pageNo, readStatus){
 	let bookContainer = document.querySelector(".book-container");
@@ -95,8 +97,7 @@ function render(title, author, pageNo, readStatus){
 	let bookTitle = document.createElement("p");
 	let bookAuthor = document.createElement("p");
 	let bookPageNo = document.createElement("p");
-	let bookReadStatusTrue = document.createElement("button");
-	let bookReadStatusFalse = document.createElement("button");
+	let bookReadStatus = document.createElement("button");
 	let bookDelete = document.createElement("button")
 	book.classList.add("book");
 	bookDelete.classList.add("btn", "btn-danger");
@@ -104,10 +105,19 @@ function render(title, author, pageNo, readStatus){
 	bookTitle.textContent = title;
 	bookAuthor.textContent = `written by: ${author}`;
 	bookPageNo.textContent = `Page number: ${pageNo}`;
-
+	bookDelete.textContent = "Remove"
+	if(readStatus == true) {
+		bookReadStatus.classList.add("btn", "btn-primary");
+		bookReadStatus.textContent = "Read"
+	} else {
+		bookReadStatus.classList.add("btn", "btn-warning");
+		bookReadStatus.textContent = "Not yet read"
+	}
 	book.appendChild(bookTitle);
 	book.appendChild(bookAuthor);
 	book.appendChild(bookPageNo);
+	book.appendChild(bookReadStatus);
+	book.append(bookDelete)
 
 	bookContainer.append(book)
 }
