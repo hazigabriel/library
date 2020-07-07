@@ -39,7 +39,6 @@ const userInputModal = {
 
 	}
 
-
 }
  
 document.querySelector(".submitButton").addEventListener("click", function(){
@@ -66,6 +65,7 @@ document.querySelector(".submitButton").addEventListener("click", function(){
 				render();
 				userInputModal.close();
 				userInputModal.resetInput();
+				deleteBook();
 
 			}
 		 
@@ -86,13 +86,11 @@ function Book(title, author, pageNo, readStatus) {
 	this.title = title;
 	this.author = author;
 	this.pageNo = pageNo;
-	this.readStatus = readStatus
+	this.readStatus = readStatus;
 }
-
 
 function addBookToLibray(title, author, pageNo, readStatus) {
 	myLibrary.push(new Book(title, author, pageNo, readStatus));
-	
 }
 
 function render(){
@@ -110,11 +108,11 @@ function render(){
 		book.setAttribute("data-bookNumber", i);
 
 		book.classList.add("book");
-		bookDelete.classList.add("btn", "btn-danger");
 		bookTitle.textContent = myLibrary[i].title;
 		bookAuthor.textContent = `written by: ${myLibrary[i].author}`;
 		bookPageNo.textContent = `Page number: ${myLibrary[i].pageNo}`;
 		bookDelete.textContent = "Remove";
+		bookDelete.classList.add("btn", "btn-danger","deleteBook");
 
 		if(myLibrary[i].readStatus == true) {
 			bookReadStatus.classList.add("btn", "btn-primary");
@@ -134,15 +132,39 @@ function render(){
 	}
 }
 
- 
-function deleteBook() {
-	
-	document.querySelectorAll(".book").forEach(function(e){
-		e.addEventListener("click", function(){
-			alert(book)
 
+function deleteBook() {
+	document.querySelectorAll(".deleteBook").forEach(function(e){
+		e.addEventListener("click", function(){
+			//alert(e.parentElement.getAttribute("data-bookNumber"))
+			myLibrary.splice(e.parentElement.getAttribute("data-bookNumber"), 1);
+			render()
 		})
+
 
 	})
 }
- 
+
+// toggleReadStatus: function(){ //toggles the "active" class for the Read status radio buttons
+
+// 		document.querySelectorAll(".readToggle").forEach(function(e){
+// 			e.addEventListener("click", function(){
+// 				if(e.classList.contains("readToggleTrue")) {
+// 					if(e.classList.contains("active")) {
+// 						return
+// 					} else {
+// 						document.querySelector(".readToggleTrue").classList.add("active")
+// 						document.querySelector(".readToggleFalse").classList.remove("active")
+// 					}
+// 				} else {
+// 					if(e.classList.contains("active")) {
+// 						return
+// 					} else {
+// 						document.querySelector(".readToggleFalse").classList.add("active")
+// 						document.querySelector(".readToggleTrue").classList.remove("active")
+// 					}
+// 				}
+
+// 			})
+// 		})
+// 	},
