@@ -1,5 +1,5 @@
 let myLibrary = [];
-
+ 
 const userInputModal = {
 	open: function(){
 		document.querySelector(".userModal").style.display = "flex";
@@ -65,12 +65,12 @@ document.querySelector(".submitButton").addEventListener("click", function(){
 				render();
 				userInputModal.close();
 				userInputModal.resetInput();
-				deleteBook();
-
+				changeBook.changeReadStatus(); 
+				changeBook.deleteBook();
 			}
 		 
 	} 
-	returnUserInput()
+	returnUserInput();
 })
 
 document.querySelector(".newBookButton").addEventListener("click", function(){
@@ -115,10 +115,10 @@ function render(){
 		bookDelete.classList.add("btn", "btn-danger","deleteBook");
 
 		if(myLibrary[i].readStatus == true) {
-			bookReadStatus.classList.add("btn", "btn-primary");
+			bookReadStatus.classList.add("btn", "btn-primary", "readStatusButton");
 			bookReadStatus.textContent = "Read"
 		} else {
-			bookReadStatus.classList.add("btn", "btn-warning");
+			bookReadStatus.classList.add("btn", "btn-warning", "readStatusButton");
 			bookReadStatus.textContent = "Not yet read"
 		}
 		book.appendChild(bookTitle);
@@ -131,40 +131,49 @@ function render(){
 
 	}
 }
+let changeBook = {
+	deleteBook: function() {
+		document.querySelectorAll(".deleteBook").forEach(function(e){
+			e.addEventListener("click", function(){
+				if(myLibrary.length == 1) {
+					myLibrary = [];
+					e.parentElement.remove();
+				} else {
+					myLibrary.splice(e.parentElement.getAttribute("data-bookNumber"), 1);
+					e.parentElement.remove();
+					console.log(myLibrary.length)
+				}
+	 
+				})
 
 
-function deleteBook() {
-	document.querySelectorAll(".deleteBook").forEach(function(e){
-		e.addEventListener("click", function(){
-			//alert(e.parentElement.getAttribute("data-bookNumber"))
-			myLibrary.splice(e.parentElement.getAttribute("data-bookNumber"), 1);
-			render()
+			})
+		},
+	changeReadStatus: function(){
+		document.querySelectorAll(".readStatusButton").forEach(function(e){
+			e.addEventListener("click", function(){
+				if(e.classList.contains("btn-warning")) {
+					e.classList.add("btn-primary");
+					e.classList.remove("btn-warning");
+					e.textContent = "Read"
+					myLibrary[e.parentElement.getAttribute("data-booknumber")].readStatus = true;
+					changeBook.deleteBook()
+					//^modifies the object read status value accordingly
+				} else {
+					e.classList.add("btn-warning");
+					e.classList.remove("btn-primary");
+					e.textContent = "Not yet read";
+					myLibrary[e.parentElement.getAttribute("data-booknumber")].readStatus = false;
+					changeBook.deleteBook()
+					//^modifies the object read status value accordingly
+				}
+			})
+
+
 		})
-
-
-	})
+	}
 }
+ 
 
-// toggleReadStatus: function(){ //toggles the "active" class for the Read status radio buttons
-
-// 		document.querySelectorAll(".readToggle").forEach(function(e){
-// 			e.addEventListener("click", function(){
-// 				if(e.classList.contains("readToggleTrue")) {
-// 					if(e.classList.contains("active")) {
-// 						return
-// 					} else {
-// 						document.querySelector(".readToggleTrue").classList.add("active")
-// 						document.querySelector(".readToggleFalse").classList.remove("active")
-// 					}
-// 				} else {
-// 					if(e.classList.contains("active")) {
-// 						return
-// 					} else {
-// 						document.querySelector(".readToggleFalse").classList.add("active")
-// 						document.querySelector(".readToggleTrue").classList.remove("active")
-// 					}
-// 				}
-
-// 			})
-// 		})
-// 	},
+	 
+ 
