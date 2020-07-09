@@ -1,4 +1,6 @@
 let myLibrary = [];
+
+
 document.querySelector(".book-container").innerHTML = "";
 
 const userInputModal = {
@@ -68,6 +70,7 @@ document.querySelector(".submitButton").addEventListener("click", function(){
 				userInputModal.resetInput();
 				changeBook.changeReadStatus(); 
 				changeBook.deleteBook();
+				saveToLocalStorage();
 			}
 		 
 	} 
@@ -147,13 +150,14 @@ let changeBook = {
 					//correspond with the objects from myLibrary
 					myLibrary.splice(e.parentElement.getAttribute("data-booknumber"), 1);
 					e.parentElement.remove();
+					saveToLocalStorage();
 					})
 
 
 				})
-			
+					
 		},
-		
+
 	changeReadStatus: function(){
 			document.querySelectorAll(".readStatusButton").forEach(function(e){
 				e.addEventListener("click", function(){
@@ -163,12 +167,14 @@ let changeBook = {
 						e.textContent = "Read"
 						myLibrary[e.parentElement.getAttribute("data-booknumber")].readStatus = true;
 						//^modifies the object read status value accordingly
+						saveToLocalStorage();
 					} else {
 						e.classList.add("btn-warning");
 						e.classList.remove("btn-primary");
 						e.textContent = "Not yet read";
 						myLibrary[e.parentElement.getAttribute("data-booknumber")].readStatus = false;
 						//^modifies the object read status value accordingly
+						saveToLocalStorage();
 					}
 				})
 
@@ -176,3 +182,21 @@ let changeBook = {
 			})
 	}
 }
+
+
+// saves, and fetches data from local store 
+function saveToLocalStorage(){
+	localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+function getLocalStorage(){
+	let str = localStorage.getItem("myLibrary");
+	myLibrary =  JSON.parse(str);
+	return myLibrary
+}
+getLocalStorage(); 
+//render the localStore data upon loading the page
+render();
+//calls changeBook functions, w no local store they are only called after manually adding a new book via the
+//newBook button
+changeBook.deleteBook();
+changeBook.changeReadStatus()
