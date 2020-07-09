@@ -1,5 +1,6 @@
 let myLibrary = [];
- 
+document.querySelector(".book-container").innerHTML = "";
+
 const userInputModal = {
 	open: function(){
 		document.querySelector(".userModal").style.display = "flex";
@@ -7,7 +8,7 @@ const userInputModal = {
 	close: function(){
 		document.querySelector(".userModal").style.display = "none";
 	},
-	toggleReadStatus: function(){ //toggles the "active" class for the Read status radio buttons
+	getReadStatus: function(){ //toggles the "active" class for the Read status radio buttons
 
 		document.querySelectorAll(".readToggle").forEach(function(e){
 			e.addEventListener("click", function(){
@@ -42,12 +43,12 @@ const userInputModal = {
 }
  
 document.querySelector(".submitButton").addEventListener("click", function(){
-	let returnUserInput = function(){
+	function returnUserInput(){
 		let title = document.querySelector(".bookTitle").value;
 		let author = document.querySelector(".bookAuthor").value;
 		let pageNo = document.querySelector(".bookPageNo").value;
 
-		let readStatus = function(){
+		function readStatus(){
 			if(document.querySelector(".readToggleTrue").classList.contains("active")) {
 				return true
 			} else if(document.querySelector(".readToggleFalse").classList.contains("active")) {
@@ -74,21 +75,21 @@ document.querySelector(".submitButton").addEventListener("click", function(){
 })
 
 document.querySelector(".newBookButton").addEventListener("click", function(){
-	userInputModal.open()
-	userInputModal.toggleReadStatus()
+	userInputModal.open();
+	userInputModal.getReadStatus();
  })
 document.querySelector(".closeModalButton").addEventListener("click", function(){
 	userInputModal.close()
  })
 
 
-function Book(title, author, pageNo, readStatus) {
+function Book(title, author, pageNo, readStatus) { //book Constructor
 	this.title = title;
 	this.author = author;
 	this.pageNo = pageNo;
 	this.readStatus = readStatus;
 }
-
+ 
 function addBookToLibray(title, author, pageNo, readStatus) {
 	myLibrary.push(new Book(title, author, pageNo, readStatus));
 }
@@ -96,7 +97,8 @@ function addBookToLibray(title, author, pageNo, readStatus) {
 function render(){
 	document.querySelector(".book-container").innerHTML = ""; //on each new call, we remove previous elements that were appeneded to the
 															  //book container, so that there would be no book duplicates displayed
-	for(let i = 0; i < myLibrary.length; i++) {
+
+	for(let i = 0; i < myLibrary.length; i++) { //loop through the myLibrary array, and display each object
 		let bookContainer = document.querySelector(".book-container");
 		let book = document.createElement("div");
 		let bookTitle = document.createElement("p");
@@ -105,7 +107,7 @@ function render(){
 		let bookReadStatus = document.createElement("button");
 		let bookDelete = document.createElement("button");
 		
-		book.setAttribute("data-bookNumber", i);
+		book.setAttribute("data-booknumber", i);
 
 		book.classList.add("book");
 		bookTitle.textContent = myLibrary[i].title;
@@ -133,47 +135,44 @@ function render(){
 }
 let changeBook = {
 	deleteBook: function() {
-		document.querySelectorAll(".deleteBook").forEach(function(e){
-			e.addEventListener("click", function(){
-				if(myLibrary.length == 1) {
-					myLibrary = [];
+
+			document.querySelectorAll(".deleteBook").forEach(function(e){
+				e.addEventListener("click", function(){
+					for(let i = 0; i < document.querySelectorAll(".book").length; i++) {
+						document.querySelectorAll(".book")[i].removeAttribute("data-booknumber");
+						document.querySelectorAll(".book")[i].setAttribute("data-booknumber", i);
+
+					}
+					//with the for() function above, we reassign the booknumber data attribute to the items displayed on the page, so that they would 
+					//correspond with the objects from myLibrary
+					myLibrary.splice(e.parentElement.getAttribute("data-booknumber"), 1);
 					e.parentElement.remove();
-				} else {
-					myLibrary.splice(e.parentElement.getAttribute("data-bookNumber"), 1);
-					e.parentElement.remove();
-					console.log(myLibrary.length)
-				}
-	 
+					})
+
+
+				})
+			
+		},
+		
+	changeReadStatus: function(){
+			document.querySelectorAll(".readStatusButton").forEach(function(e){
+				e.addEventListener("click", function(){
+					if(e.classList.contains("btn-warning")) {
+						e.classList.add("btn-primary");
+						e.classList.remove("btn-warning");
+						e.textContent = "Read"
+						myLibrary[e.parentElement.getAttribute("data-booknumber")].readStatus = true;
+						//^modifies the object read status value accordingly
+					} else {
+						e.classList.add("btn-warning");
+						e.classList.remove("btn-primary");
+						e.textContent = "Not yet read";
+						myLibrary[e.parentElement.getAttribute("data-booknumber")].readStatus = false;
+						//^modifies the object read status value accordingly
+					}
 				})
 
 
 			})
-		},
-	changeReadStatus: function(){
-		document.querySelectorAll(".readStatusButton").forEach(function(e){
-			e.addEventListener("click", function(){
-				if(e.classList.contains("btn-warning")) {
-					e.classList.add("btn-primary");
-					e.classList.remove("btn-warning");
-					e.textContent = "Read"
-					myLibrary[e.parentElement.getAttribute("data-booknumber")].readStatus = true;
-					changeBook.deleteBook()
-					//^modifies the object read status value accordingly
-				} else {
-					e.classList.add("btn-warning");
-					e.classList.remove("btn-primary");
-					e.textContent = "Not yet read";
-					myLibrary[e.parentElement.getAttribute("data-booknumber")].readStatus = false;
-					changeBook.deleteBook()
-					//^modifies the object read status value accordingly
-				}
-			})
-
-
-		})
 	}
 }
- 
-
-	 
- 
