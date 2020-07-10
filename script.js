@@ -1,6 +1,17 @@
+document.addEventListener("DOMContentLoaded", function(event) { //load functions, after all dom elements were loaded
+
 let myLibrary = [];
 
-
+function Book(title, author, pageNo, readStatus) { //book Constructor
+	this.title = title;
+	this.author = author;
+	this.pageNo = pageNo;
+	this.readStatus = readStatus
+}
+ 
+function addBookToLibray(title, author, pageNo, readStatus) {
+	myLibrary.push(new Book(title, author, pageNo, readStatus));
+}
 document.querySelector(".book-container").innerHTML = "";
 
 const userInputModal = {
@@ -84,18 +95,6 @@ document.querySelector(".newBookButton").addEventListener("click", function(){
 document.querySelector(".closeModalButton").addEventListener("click", function(){
 	userInputModal.close()
  })
-
-
-function Book(title, author, pageNo, readStatus) { //book Constructor
-	this.title = title;
-	this.author = author;
-	this.pageNo = pageNo;
-	this.readStatus = readStatus;
-}
- 
-function addBookToLibray(title, author, pageNo, readStatus) {
-	myLibrary.push(new Book(title, author, pageNo, readStatus));
-}
 
 function render(){
 	document.querySelector(".book-container").innerHTML = ""; //on each new call, we remove previous elements that were appeneded to the
@@ -200,3 +199,6 @@ render();
 //newBook button
 changeBook.deleteBook();
 changeBook.changeReadStatus()
+
+  //here your code
+});//load functions, after all dom elements were loaded
